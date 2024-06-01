@@ -1,4 +1,4 @@
-import {cart} from '/js/cart.js'
+import * as cartModule from '/js/cart.js'
 import {products} from '/data/products.js'
 
 let productsGRID = document.querySelector('.js-products-grid')
@@ -66,27 +66,10 @@ document.querySelectorAll('.js-add-to-cart').forEach((btn) => {
     btn.addEventListener('click', ()=>{
         const productId = btn.dataset.id
         
-        let matchedItem = ''
-        
-        cart.forEach((item) => {
-            if (productId === item.productId){
-                matchedItem = item
-            }
-        })
-        if (matchedItem){
-            matchedItem.quantity += 1
-        } else{
-            cart.push({
-                productId: productId,
-                quantity: 1
-            })        
-        }
+        cartModule.addToCart(productId)
 
-        let cartQty = 0
-        cart.forEach((item) => {  
-                cartQty += item.quantity
-        })
-        cartQuantity.innerHTML = cartQty
+        cartModule.updateCartQuatity()
+       
     })
 })
 
