@@ -1,4 +1,5 @@
 import {cart} from '/js/cart.js'
+import {products} from '/data/products.js'
 
 let productsGRID = document.querySelector('.js-products-grid')
 let productsHTML = ''
