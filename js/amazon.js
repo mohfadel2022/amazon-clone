@@ -1,5 +1,6 @@
 let productsGRID = document.querySelector('.js-products-grid')
 let productsHTML = ''
+let cartQuantity = document.querySelector('.js-cart-quantity')
 
 products.forEach((product) => {
    productsHTML += `
@@ -75,9 +76,14 @@ document.querySelectorAll('.js-add-to-cart').forEach((btn) => {
             cart.push({
                 productId: productId,
                 quantity: 1
-            })
-        
+            })        
         }
+
+        let cartQty = 0
+        cart.forEach((item) => {  
+                cartQty += item.quantity
+        })
+        cartQuantity.innerHTML = cartQty
     })
 })
 
