@@ -1,3 +1,5 @@
+import {cart} from '/js/cart.js'
+
 let productsGRID = document.querySelector('.js-products-grid')
 let productsHTML = ''
 let cartQuantity = document.querySelector('.js-cart-quantity')
