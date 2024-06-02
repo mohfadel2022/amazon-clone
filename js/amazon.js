@@ -5,7 +5,6 @@ import {formatCurrency} from '/js/utils.js'
 
 let productsGRID = document.querySelector('.js-products-grid')
 let productsHTML = ''
-let cartQuantity = document.querySelector('.js-cart-quantity')
 
 products.forEach((product) => {
    productsHTML += `
@@ -63,14 +62,13 @@ products.forEach((product) => {
 }) 
 
 productsGRID.innerHTML = productsHTML
+cartModule.updateCartQuatity('cart')
 
 document.querySelectorAll('.js-add-to-cart').forEach((btn) => {
     btn.addEventListener('click', ()=>{
         const productId = btn.dataset.id
         
         cartModule.addToCart(productId)
-
-        cartModule.updateCartQuatity()
        
     })
 })
