@@ -64,113 +64,121 @@ function deliverOptionaHTML(cartItem){
 
 }
 
-let cartSummaryHTML = ''
+function renderOrderSymmary(){
 
-cartModule.cart.forEach(cartItem => {
-    const productId = cartItem.productId
-    const cartItemDetails = getProductDetails(productId)
+    let cartSummaryHTML = ''
 
-    cartSummaryHTML +=  `
-    <div class="cart-item-container js-cart-item-container-${productId}">
-        <div class="delivery-date js-deliver-date">  
-            ${deliverOptionaHTML(cartItem).deliveryDate}          
-        </div>
+    cartModule.cart.forEach(cartItem => {
+        const productId = cartItem.productId
+        const cartItemDetails = getProductDetails(productId)
 
-        <div class="cart-item-details-grid">
-            <img class="product-image"
-            src="${cartItemDetails.image}">
-
-            <div class="cart-item-details">
-                <div class="product-name">
-                    ${cartItemDetails.name}
-                </div>
-                <div class="product-price">
-                ${formatCurrency(cartItemDetails.priceCents)}
-                </div>
-                <div class="product-quantity">
-                    <span>
-                        Quantity: <span class="quantity-label js-product-quantity-${productId}">${cartItem.quantity}</span>
-                    </span>
-                    <span class="update-quantity-link link-primary js-update-link" data-product-id="${productId}">
-                        Update
-                    </span>
-                    <input class="quantity-input js-input-quantity-${productId}">
-                    <span class="save-quantity-link link-primary js-save-link" data-product-id="${productId}">Save</span>
-                    <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${productId}">
-                        Delete
-                    </span>
-                </div>
+        cartSummaryHTML +=  `
+        <div class="cart-item-container js-cart-item-container-${productId}">
+            <div class="delivery-date js-deliver-date">  
+                Delivery date: ${deliverOptionaHTML(cartItem).deliveryDate}          
             </div>
 
-            <div class="delivery-options">
-                <div class="delivery-options-title">
-                    Choose a delivery option:
+            <div class="cart-item-details-grid">
+                <img class="product-image"
+                src="${cartItemDetails.image}">
+
+                <div class="cart-item-details">
+                    <div class="product-name">
+                        ${cartItemDetails.name}
+                    </div>
+                    <div class="product-price">
+                    ${formatCurrency(cartItemDetails.priceCents)}
+                    </div>
+                    <div class="product-quantity">
+                        <span>
+                            Quantity: <span class="quantity-label js-product-quantity-${productId}">${cartItem.quantity}</span>
+                        </span>
+                        <span class="update-quantity-link link-primary js-update-link" data-product-id="${productId}">
+                            Update
+                        </span>
+                        <input class="quantity-input js-input-quantity-${productId}">
+                        <span class="save-quantity-link link-primary js-save-link" data-product-id="${productId}">Save</span>
+                        <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${productId}">
+                            Delete
+                        </span>
+                    </div>
                 </div>
-                <div>
-                    ${deliverOptionaHTML(cartItem).html}
+
+                <div class="delivery-options">
+                    <div class="delivery-options-title">
+                        Choose a delivery option:
+                    </div>
+                    <div>
+                        ${deliverOptionaHTML(cartItem).html}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    `
-});
+        `
 
-cartSummryDIV.innerHTML = cartSummaryHTML
-updateCartQuatity()
+    });
+    
 
-document.querySelectorAll('.js-delete-link')
-    .forEach((link) => {
-        link.addEventListener('click', () => {
-            const productId = link.dataset.productId
-            cartModule.removeFromCart(productId)
-            const container = document.querySelector(`.js-cart-item-container-${productId}`)
-            container.remove()
-            updateCartQuatity()
-        })
-    }
-)
+    cartSummryDIV.innerHTML = cartSummaryHTML
+    updateCartQuatity()
 
-document.querySelectorAll('.js-update-link')
-    .forEach((link) => {
-        link.addEventListener('click', () => {
-            const productId = link.dataset.productId
-            let cartItemContainer = document.querySelector(`.js-cart-item-container-${productId}`)
-            cartItemContainer.classList.add('is-editing-quantity')
-            const quantity = document.querySelector(`.js-product-quantity-${productId}`)
-        })
-    }
-)
 
-document.querySelectorAll('.js-save-link')
-    .forEach((link) => {
-        link.addEventListener('click', () => {
-            const productId = link.dataset.productId
-            let cartItemContainer = document.querySelector(`.js-cart-item-container-${productId}`)
-            const quantityInput = document.querySelector(`.js-product-quantity-${productId}`)
-            cartItemContainer.classList.remove('is-editing-quantity')
-            let newQty = Number(document.querySelector(`.js-input-quantity-${productId}`).value)
-            quantityInput.innerHTML = newQty
-
-            cartModule.cart.forEach((cartItem) => {
-                if (productId === cartItem.productId){
-                    cartItem.quantity = newQty
-                }
+    document.querySelectorAll('.js-delete-link')
+        .forEach((link) => {
+            link.addEventListener('click', () => {
+                const productId = link.dataset.productId
+                cartModule.removeFromCart(productId)
+                const container = document.querySelector(`.js-cart-item-container-${productId}`)
+                container.remove()
+                updateCartQuatity()
             })
-            localStorage.setItem('cart', JSON.stringify(cartModule.cart) )
-            updateCartQuatity()
+        }
+    )
+
+    document.querySelectorAll('.js-update-link')
+        .forEach((link) => {
+            link.addEventListener('click', () => {
+                const productId = link.dataset.productId
+                let cartItemContainer = document.querySelector(`.js-cart-item-container-${productId}`)
+                cartItemContainer.classList.add('is-editing-quantity')
+                const quantity = document.querySelector(`.js-product-quantity-${productId}`)
+            })
+        }
+    )
+
+    document.querySelectorAll('.js-save-link')
+        .forEach((link) => {
+            link.addEventListener('click', () => {
+                const productId = link.dataset.productId
+                let cartItemContainer = document.querySelector(`.js-cart-item-container-${productId}`)
+                const quantityInput = document.querySelector(`.js-product-quantity-${productId}`)
+                cartItemContainer.classList.remove('is-editing-quantity')
+                let newQty = Number(document.querySelector(`.js-input-quantity-${productId}`).value)
+                quantityInput.innerHTML = newQty
+
+                cartModule.cart.forEach((cartItem) => {
+                    if (productId === cartItem.productId){
+                        cartItem.quantity = newQty
+                    }
+                })
+                localStorage.setItem('cart', JSON.stringify(cartModule.cart) )
+                updateCartQuatity()
+            })
+
+        }
+    )
+
+    document.querySelectorAll('.js-delivery-option')
+        .forEach((el) => {
+            el.addEventListener('click', () => {
+                const {productId, deliveryOptionId}  = el.dataset
+                
+                cartModule.updateDeliveryOption(productId, deliveryOptionId)
+                renderOrderSymmary()
+                
+            })
+
         })
-
-    }
-)
-
-document.querySelectorAll('.js-delivery-option')
-    .forEach((el) => {
-        el.addEventListener('click', () => {
-            const {productId, deliveryOptionId}  = el.dataset
-            
-            cartModule.updateDeliveryOption(productId, deliveryOptionId)
-
-        })
-
-    }
-)
+}   
+        
+renderOrderSymmary()
