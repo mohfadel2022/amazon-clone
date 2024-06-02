@@ -39,8 +39,10 @@ function deliverOptionaHTML(cartItem){
         const dateString = today.add(deliveryOption.deliveryDays, 'days').format('dddd, MMMM D')
         const priceString = (deliveryOption.priceCents === 0)? "FREE": `€ ${formatCurrency(deliveryOption.priceCents)} -`
         if (deliveryOption.id === cartItem.deliveryOptionId){ deliveryDate = dateString }
-        
-        html += `<div class="delivery-option">
+
+        html += `<div class="delivery-option js-delivery-option"
+                    data-product-id= "${cartItem.productId}"
+                    data-delivery-option-id="${deliveryOption.id}">
                     <input type="radio" ${isChecked}
                     class="delivery-option-input"
                     name="delivery-option-${cartItem.productId}">
@@ -156,6 +158,18 @@ document.querySelectorAll('.js-save-link')
             })
             localStorage.setItem('cart', JSON.stringify(cartModule.cart) )
             updateCartQuatity()
+        })
+
+    }
+)
+
+document.querySelectorAll('.js-delivery-option')
+    .forEach((el) => {
+        el.addEventListener('click', () => {
+            const {productId, deliveryOptionId}  = el.dataset
+            
+            cartModule.updateDeliveryOption(productId, deliveryOptionId)
+
         })
 
     }
