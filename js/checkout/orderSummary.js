@@ -1,25 +1,13 @@
 import * as cartModule from '/js/cart.js'
-import { products } from '/data/products.js'
-import {formatCurrency} from '/js/utils.js'
+import { getProductDetails } from '/data/products.js'
+import {formatCurrency } from '/js/utils.js'
 import { deliveryOptions } from '/data/deliveryOptions.js'
 
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
 
-let cartSummryDIV = document.querySelector('.js-order-summary')
+let orederSummryDIV = document.querySelector('.js-order-summary')
 
-
-function getProductDetails(productId){
-    let matchedItem
-
-    products.forEach((product) => {
-        if(productId === product.id){
-            matchedItem = product
-        }
-    })
-    return matchedItem
-}
-
-function updateCartQuatity(){
+function updateCheckoutQuatity(){
     let cartQty = 0
     cartModule.cart.forEach((cartItem) => {  
             cartQty += cartItem.quantity
@@ -29,7 +17,7 @@ function updateCartQuatity(){
 
 }
 
-function deliverOptionaHTML(cartItem){
+function deliveryOptionaHTML(cartItem){
     let html = ''
     let deliveryDate
 
@@ -64,7 +52,7 @@ function deliverOptionaHTML(cartItem){
 
 }
 
-export function renderOrderSymmary(){
+export function renderOrderSummary(){
 
     let cartSummaryHTML = ''
 
@@ -75,7 +63,7 @@ export function renderOrderSymmary(){
         cartSummaryHTML +=  `
         <div class="cart-item-container js-cart-item-container-${productId}">
             <div class="delivery-date js-deliver-date">  
-                Delivery date: ${deliverOptionaHTML(cartItem).deliveryDate}          
+                Delivery date: ${deliveryOptionaHTML(cartItem).deliveryDate}          
             </div>
 
             <div class="cart-item-details-grid">
@@ -109,7 +97,7 @@ export function renderOrderSymmary(){
                         Choose a delivery option:
                     </div>
                     <div>
-                        ${deliverOptionaHTML(cartItem).html}
+                        ${deliveryOptionaHTML(cartItem).html}
                     </div>
                 </div>
             </div>
@@ -119,8 +107,8 @@ export function renderOrderSymmary(){
     });
     
 
-    cartSummryDIV.innerHTML = cartSummaryHTML
-    updateCartQuatity()
+    orederSummryDIV.innerHTML = cartSummaryHTML
+    updateCheckoutQuatity()
 
 
     document.querySelectorAll('.js-delete-link')
@@ -130,7 +118,7 @@ export function renderOrderSymmary(){
                 cartModule.removeFromCart(productId)
                 const container = document.querySelector(`.js-cart-item-container-${productId}`)
                 container.remove()
-                updateCartQuatity()
+                updateCheckoutQuatity()
             })
         }
     )
@@ -162,7 +150,7 @@ export function renderOrderSymmary(){
                     }
                 })
                 localStorage.setItem('cart', JSON.stringify(cartModule.cart) )
-                updateCartQuatity()
+                updateCheckoutQuatity()
             })
 
         }
@@ -174,7 +162,7 @@ export function renderOrderSymmary(){
                 const {productId, deliveryOptionId}  = el.dataset
                 
                 cartModule.updateDeliveryOption(productId, deliveryOptionId)
-                renderOrderSymmary()
+                renderOrderSummary()
                 
             })
 
