@@ -10,7 +10,7 @@ export function loadFromStorage(){
         cart = [
             {
                 productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
-                quantity: 2,
+                quantity: 1,
                 deliveryOptionId: '1'
     
             },
@@ -77,8 +77,6 @@ export function removeFromCart(productId){
 }
 
 export function updateDeliveryOption(productId, deliveryOptionId){
-
-    let matchedItem
         
     cart.forEach((cartItem) => {
         if (productId === cartItem.productId){

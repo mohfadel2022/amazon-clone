@@ -85,7 +85,7 @@ export function renderOrderSummary(){
                     </div>
                     <div class="product-quantity js-product-quantity-${productId}">
                         <span>
-                            Quantity: <span class="quantity-label js-product-quantity-${productId}">
+                            Quantity: <span class="quantity-label js-product-quantity-span-${productId}">
                             ${cartItem.quantity}</span>
                         </span>
                         <span class="update-quantity-link link-primary js-update-link" 
@@ -153,10 +153,10 @@ export function renderOrderSummary(){
             link.addEventListener('click', () => {
                 const productId = link.dataset.productId
                 let cartItemContainer = document.querySelector(`.js-cart-item-container-${productId}`)
-                const quantityInput = document.querySelector(`.js-product-quantity-${productId}`)
+                const quantitySpan = document.querySelector(`.js-product-quantity-span-${productId}`)
                 cartItemContainer.classList.remove('is-editing-quantity')
                 let newQty = Number(document.querySelector(`.js-input-quantity-${productId}`).value)
-                quantityInput.innerHTML = newQty
+                quantitySpan.innerText = newQty
 
                 cartModule.cart.forEach((cartItem) => {
                     if (productId === cartItem.productId){
