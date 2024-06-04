@@ -6,7 +6,7 @@ import { renderPaymentSummary } from './paymentSummary.js'
 
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
 
-let orederSummryDIV = document.querySelector('.js-order-summary')
+// let orderSummryDIV = document.querySelector('.js-order-summary')
 
 function updateCheckoutQuatity(){
     let cartQty = 0
@@ -14,9 +14,14 @@ function updateCheckoutQuatity(){
             cartQty += cartItem.quantity
     })
 
-    document.querySelector('.js-checkout-quantity').innerHTML = cartQty+ " items"
+    if(document.querySelector('.js-checkout-quantity')!== null){
+
+        document.querySelector('.js-checkout-quantity').innerHTML = cartQty+ " items"
+    }
 
 }
+
+updateCheckoutQuatity()
 
 function deliveryOptionaHTML(cartItem){
     let html = ''
@@ -78,16 +83,20 @@ export function renderOrderSummary(){
                     <div class="product-price">
                     ${formatCurrency(cartItemDetails.priceCents)}
                     </div>
-                    <div class="product-quantity">
+                    <div class="product-quantity js-product-quantity-${productId}">
                         <span>
-                            Quantity: <span class="quantity-label js-product-quantity-${productId}">${cartItem.quantity}</span>
+                            Quantity: <span class="quantity-label js-product-quantity-${productId}">
+                            ${cartItem.quantity}</span>
                         </span>
-                        <span class="update-quantity-link link-primary js-update-link" data-product-id="${productId}">
+                        <span class="update-quantity-link link-primary js-update-link" 
+                            data-product-id="${productId}">
                             Update
                         </span>
                         <input class="quantity-input js-input-quantity-${productId}">
-                        <span class="save-quantity-link link-primary js-save-link" data-product-id="${productId}">Save</span>
-                        <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${productId}">
+                        <span class="save-quantity-link link-primary js-save-link" 
+                            data-product-id="${productId}">Save</span>
+                        <span class="delete-quantity-link link-primary js-delete-link" 
+                            data-product-id="${productId}">
                             Delete
                         </span>
                     </div>
@@ -108,8 +117,8 @@ export function renderOrderSummary(){
     });
     
 
-    orederSummryDIV.innerHTML = cartSummaryHTML
-    updateCheckoutQuatity()
+    document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML
+    // updateCheckoutQuatity()
 
 
     document.querySelectorAll('.js-delete-link')
@@ -119,9 +128,9 @@ export function renderOrderSummary(){
                 cartModule.removeFromCart(productId)
 
                 const container = document.querySelector(`.js-cart-item-container-${productId}`)
+                
                 container.remove()
                 updateCheckoutQuatity()
-
                 renderPaymentSummary()
 
             })

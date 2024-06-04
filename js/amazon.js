@@ -66,9 +66,9 @@ cartModule.updateCartQuatity('cart')
 
 document.querySelectorAll('.js-add-to-cart').forEach((btn) => {
     btn.addEventListener('click', ()=>{
-        const productId = btn.dataset.id
-        
+        const productId = btn.dataset.id        
         cartModule.addToCart(productId)
+        cartModule.updateCartQuatity()
        
     })
 })
