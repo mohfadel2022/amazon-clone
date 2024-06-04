@@ -1,11 +1,30 @@
-export function getProductDetails(productId){
-  let matchedProduct
-  products.forEach((product) => {
-      if(productId === product.id){
-          matchedProduct =  product
-      }
-  })
-  return matchedProduct
+import { formatCurrency } from '/js/utils.js'
+
+
+
+class Product {
+  id
+  image
+  name
+  rating = {}
+  priceCents
+  keywords = []
+  constructor(productDetails) {
+      this.id = productDetails.id
+      this.image = productDetails.image
+      this.name = productDetails.name
+      this.rating = productDetails.rating
+      this.priceCents = productDetails.priceCents
+      this.keywords = productDetails.keywords
+
+  }
+  getStarsUrl(){
+    return `images/ratings/rating-${this.rating.stars * 10}.png`
+  }
+  getPrice(){
+    return `€ ${formatCurrency(this.priceCents)}`
+  }
+  
 }
 
 export const products = [
@@ -667,4 +686,28 @@ export const products = [
       "mens"
     ]
   }
-];
+].map((productDetails) => {
+  return new Product(productDetails)
+})
+
+export function getProductDetails(productId){
+  // let matchedProduct
+  // products.forEach((product) => {
+  //     if(productId === product.id){
+  //         matchedProduct =  product
+  //     }
+
+  // })
+
+  let item = products.find(item => item.id === productId);
+        if (item) {
+            return item
+        } else {
+            console.log('This product don\'t exist')
+        }
+  // return matchedProduct
+}
+
+
+
+

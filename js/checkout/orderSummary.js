@@ -81,7 +81,7 @@ export function renderOrderSummary(){
                         ${cartItemDetails.name}
                     </div>
                     <div class="product-price">
-                    ${formatCurrency(cartItemDetails.priceCents)}
+                    ${cartItemDetails.getPrice()}
                     </div>
                     <div class="product-quantity js-product-quantity-${productId}">
                         <span>

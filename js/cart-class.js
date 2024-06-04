@@ -15,7 +15,7 @@ class Cart {
         } else{
             this.cartItems = [
                 {
-                    productId: "e43638ce-6aa0-4b85-b27f-e1d07eb678c6",
+                    productId: "e43638ce-6aa0-4b85-b27f-",
                     quantity: 2,
                     deliveryOptionId: '1'
         
