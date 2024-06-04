@@ -70,7 +70,7 @@ function Cart(cartName){
 }
 
 const cart = Cart('cart-oop')
-const businessCart = Cart('cart-b')
+const businessCart = Cart('cart-oop-b')
 
 
 cart.loadFromStorage()
