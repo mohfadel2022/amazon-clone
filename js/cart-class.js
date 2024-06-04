@@ -1,4 +1,5 @@
 class Cart {
+    
     cartItems
     #localStorageKey
 
@@ -70,15 +71,6 @@ class Cart {
     }    
 
 }
-
-const cart = new Cart('cart-class')
-const businessCart = new Cart('cart-class-b')
-
-
-cart.addToCart('83d4ca15-0f35-48f5-b7a3-1ea210004f2e')
-
-console.log(cart)
-console.log(businessCart)
 
 
 
