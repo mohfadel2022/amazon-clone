@@ -1,4 +1,4 @@
-import * as cartModule from '../cart.js'
+import { cart, removeFromCart, updateDeliveryOption } from '../cart.js'
 import { getProductDetails } from '../../data/products.js'
 import { formatCurrency } from '../utils.js'
 import { deliveryOptions } from '../../data/deliveryOptions.js'
@@ -10,7 +10,7 @@ import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
 
 function updateCheckoutQuatity(){
     let cartQty = 0
-    cartModule.cart.forEach((cartItem) => {  
+    cart.forEach((cartItem) => {  
             cartQty += cartItem.quantity
     })
 
@@ -62,7 +62,7 @@ export function renderOrderSummary(){
 
     let cartSummaryHTML = ''
 
-    cartModule.cart.forEach(cartItem => {
+    cart.forEach(cartItem => {
         const productId = cartItem.productId
         const cartItemDetails = getProductDetails(productId)
 
@@ -125,7 +125,7 @@ export function renderOrderSummary(){
         .forEach((link) => {
             link.addEventListener('click', () => {
                 const productId = link.dataset.productId
-                cartModule.removeFromCart(productId)
+                removeFromCart(productId)
 
                 const container = document.querySelector(`.js-cart-item-container-${productId}`)
                 
@@ -158,12 +158,12 @@ export function renderOrderSummary(){
                 let newQty = Number(document.querySelector(`.js-input-quantity-${productId}`).value)
                 quantitySpan.innerText = newQty
 
-                cartModule.cart.forEach((cartItem) => {
+                cart.forEach((cartItem) => {
                     if (productId === cartItem.productId){
                         cartItem.quantity = newQty
                     }
                 })
-                localStorage.setItem('cart', JSON.stringify(cartModule.cart) )
+                localStorage.setItem('cart', JSON.stringify(cart) )
                 updateCheckoutQuatity()
                 renderPaymentSummary()
             })
@@ -176,7 +176,7 @@ export function renderOrderSummary(){
             el.addEventListener('click', () => {
                 const {productId, deliveryOptionId}  = el.dataset
                 
-                cartModule.updateDeliveryOption(productId, deliveryOptionId)
+                updateDeliveryOption(productId, deliveryOptionId)
                 renderOrderSummary()
                 renderPaymentSummary()
             })

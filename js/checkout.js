@@ -1,4 +1,3 @@
-import { loadCart } from './cart.js'
 import { loadProductsFetch } from '../data/products.js'
 import { renderOrderSummary } from './checkout/orderSummary.js'
 import { renderPaymentSummary } from './checkout/paymentSummary.js'
@@ -12,11 +11,8 @@ async function loadPage(){
         // throw 'error 1'
         await loadProductsFetch()
         const value = await new Promise((resolve, reject) => {
-            // throw 'error 2'
-            loadCart(() => {
-                // reject('error 3')
-                resolve('value3')
-            })
+            resolve('value3')
+           
         })
 
     } catch (error) {

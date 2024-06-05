@@ -1,4 +1,3 @@
-import * as cartModule from './cart.js'
 import { getProductDetails, loadProductsFetch } from '../data/products.js'
 import {formatCurrency } from './utils.js'
 
@@ -93,11 +92,7 @@ async function loadPage(){
       // throw 'error 1'
       await loadProductsFetch()
       const value = await new Promise((resolve, reject) => {
-          // throw 'error 2'
-          cartModule.loadCart(() => {
-              // reject('error 3')
               resolve('value3')
-          })
       })
 
   } catch (error) {
