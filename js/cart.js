@@ -85,3 +85,7 @@ export function updateDeliveryOption(productId, deliveryOptionId){
     })
     saveToStorage()
 }
+
+export function loadCart(){
+    console.log('load cart')
+}

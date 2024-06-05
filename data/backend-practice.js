@@ -1,4 +1,5 @@
 const xhr = new XMLHttpRequest()
+
 xhr.addEventListener('load', () => {
     
     const res = xhr.response

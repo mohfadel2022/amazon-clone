@@ -1,5 +1,5 @@
 import { cart } from "../cart.js"
-import { getProductDetails } from '/data/products.js'
+// import { getProductDetails } from '/data/products.js'
 import { getDeliveryDetails } from '/data/deliveryOptions.js'
 import { formatCurrency } from "../utils.js"
 
