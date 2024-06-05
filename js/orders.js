@@ -1,5 +1,5 @@
 import * as cartModule from './cart.js'
-import { getProductDetails, loadProductsFetch } from '../../data/products.js'
+import { getProductDetails, loadProductsFetch } from '../data/products.js'
 import {formatCurrency } from './utils.js'
 
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'
