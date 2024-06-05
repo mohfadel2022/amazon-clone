@@ -758,7 +758,7 @@ export const products = [
   return new Product(productDetails)
 })
 
-
+*/
 
 export function getProductDetails(productId){
   let item = products.find(item => item.id === productId);
@@ -770,6 +770,5 @@ export function getProductDetails(productId){
   // return matchedProduct
 }
 
-*/
 
 
