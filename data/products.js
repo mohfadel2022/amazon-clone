@@ -1,6 +1,6 @@
 import { formatCurrency } from '../js/utils.js'
 
-let dataPath = '../backend/products.json'
+let dataPath = './backend/products.json'
 class Product {
   id
   image
