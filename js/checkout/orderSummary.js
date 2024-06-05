@@ -1,7 +1,7 @@
-import * as cartModule from '/js/cart.js'
-import { getProductDetails } from '/data/products.js'
-import { formatCurrency } from '/js/utils.js'
-import { deliveryOptions } from '/data/deliveryOptions.js'
+import * as cartModule from '../cart.js'
+import { getProductDetails } from '../../data/products.js'
+import { formatCurrency } from '../utils.js'
+import { deliveryOptions } from '../../data/deliveryOptions.js'
 import { renderPaymentSummary } from './paymentSummary.js'
 
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js'

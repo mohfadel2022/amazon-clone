@@ -1,4 +1,4 @@
-import { formatCurrency } from '/js/utils.js'
+import { formatCurrency } from '../js/utils.js'
 
 
 class Product {

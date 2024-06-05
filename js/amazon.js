@@ -1,5 +1,5 @@
-import * as cartModule from '/js/cart.js'
-import { products, loadProductsFetch}  from '/data/products.js'
+import * as cartModule from './cart.js'
+import { products, loadProductsFetch}  from '../../data/products.js'
 
 
 // loadProducts(renderPageHTML)
