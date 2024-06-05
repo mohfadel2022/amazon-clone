@@ -72,18 +72,27 @@ export function loadProductsFetch(){
 
 // loadProductsFetch()
 
-function loadProducts (){
+export function loadProducts (fun){
   const xhr = new XMLHttpRequest()
   
   xhr.addEventListener('error', (error) => {
     console.log('Unexpected error. Please try again later.')
   })
+
   xhr.addEventListener('load', () => {
     
-    let res = xhr.response
-    // products.push(res)
-    console.log(res)
+    products = JSON.parse(xhr.response).map((productDetails) => {
+      if (productDetails.type === 'clothing') {
+        return new Clothing(productDetails);
+      }
+      return new Product(productDetails);
+    });
+
+    console.log('load products');
+
+    fun();
   })
+  
   xhr.open('GET', 'https://supersimplebackend.dev/products')
   xhr.send()
 
@@ -761,7 +770,7 @@ export const products = [
 */
 
 export function getProductDetails(productId){
-  let item = products.find(item => item.id === productId);
+  let item = products.find((item) => item.id === productId);
   if (item) {
       return item
   } else {

@@ -2,7 +2,7 @@ import { cart } from "../cart.js"
 import { getProductDetails } from '/data/products.js'
 import { getDeliveryDetails } from '/data/deliveryOptions.js'
 import { formatCurrency } from "../utils.js"
-import { adOrder } from "./orders.js"
+import { addOrder } from "../orders.js"
 
 
 let paymentSummryDIV = document.querySelector('.js-payment-summary')
@@ -90,7 +90,7 @@ export function renderPaymentSummary(){
             })
 
             const order = await response.json()
-            adOrder(order)
+            addOrder(order)
         } catch (error) {
             console.log(`Unexpected error ${error}. Try again later`)
         }

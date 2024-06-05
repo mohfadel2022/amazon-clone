@@ -1,6 +1,6 @@
 import * as cartModule from '/js/cart.js'
 import { getProductDetails } from '/data/products.js'
-import {formatCurrency } from '/js/utils.js'
+import { formatCurrency } from '/js/utils.js'
 import { deliveryOptions } from '/data/deliveryOptions.js'
 import { renderPaymentSummary } from './paymentSummary.js'
 
