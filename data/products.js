@@ -1,6 +1,6 @@
 import { formatCurrency } from '../js/utils.js'
 
-
+let dataPath = '../backend/products.json'
 class Product {
   id
   image
@@ -49,7 +49,7 @@ export let products = []
 
 export function loadProductsFetch(){
   const promise = fetch(
-    'https://supersimplebackend.dev/products'
+    dataPath
   ).then((response) => {
     return response.json()
   }).then((productsData) => {
